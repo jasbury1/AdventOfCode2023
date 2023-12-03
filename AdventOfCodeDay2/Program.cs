@@ -33,7 +33,7 @@ namespace AdventOfCode.Day2
             var total = 0;
             foreach (string line in textFromFile)
             {
-                var rounds = line.Split(';').Select(x => ParseResult(x));
+                var rounds = line.Split(';').Select(ParseResult);
                 var minValues = GetMinPossibleCounts(rounds);
                 total += minValues.Power;
             }
