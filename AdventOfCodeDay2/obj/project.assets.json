@@ -8,7 +8,7 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/var/root/.nuget/packages/": {}
+    "/Users/jamesasbury/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -16,11 +16,11 @@
       "projectUniqueName": "/Users/jamesasbury/Repos/AoC_2023/AdventOfCodeDay2/AdventOfCodeDay2.csproj",
       "projectName": "AdventOfCodeDay2",
       "projectPath": "/Users/jamesasbury/Repos/AoC_2023/AdventOfCodeDay2/AdventOfCodeDay2.csproj",
-      "packagesPath": "/var/root/.nuget/packages/",
+      "packagesPath": "/Users/jamesasbury/.nuget/packages/",
       "outputPath": "/Users/jamesasbury/Repos/AoC_2023/AdventOfCodeDay2/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/var/root/.nuget/NuGet/NuGet.Config"
+        "/Users/jamesasbury/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
