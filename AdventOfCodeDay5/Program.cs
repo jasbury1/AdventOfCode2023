@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace AdventOfCode.Day4
+namespace AdventOfCode.Day5
 {
 
     public record Mapping(long DestRangeStart, long SrcRangeStart, long RangeLength);
