@@ -1,12 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace AdventOfCode.Day6
 {
