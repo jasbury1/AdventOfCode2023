@@ -130,8 +130,6 @@ namespace AdventOfCode.Day4
             }
             return result;
         }
-
-        
     }
 
     public class MapComparer : Comparer<Mapping>
