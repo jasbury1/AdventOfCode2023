@@ -10,29 +10,24 @@ namespace AdventOfCode.Day6
             long[] times = {48876981};
             long[] distances = {255128811171623};
 
-            var result = 1;
+            long result = 1;
             for (int i = 0; i < times.Length; i++)
             {
-                result *= (GetAllWinningValues(distances[i], times[i])).Count();
+                result *= (GetAllWinningValues(distances[i], times[i]));
             }
             Console.WriteLine(result);
         }
 
-        public static List<long> GetAllWinningValues(long distanceToBeat, long timeAllowed)
+        public static long GetAllWinningValues(long distanceToBeat, long timeAllowed)
         {
-            List<long> solutions = new();
-
             var (min, max) = GetTimeHeldBounds(distanceToBeat, timeAllowed);
             var minBound = (long)min;
             if (minBound <= distanceToBeat)
             {
                 minBound += 1;
             }
-            for (long i = minBound; i < max; ++i)
-            {
-                solutions.Add(i);
-            }
-            return solutions;
+            var maxBound = (int)max - 1;
+            return maxBound - minBound + 1;
         }
 
         public static (double min, double max) GetTimeHeldBounds(long minDistance, long timeAllowed)
