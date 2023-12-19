@@ -34,8 +34,7 @@ namespace AdventOfCode.Day5
         public int CompareTo(object? obj) {
             if (obj == null) return 1;
 
-            Hand? otherHand = obj as Hand;
-            if (otherHand != null)
+            if (obj is Hand otherHand)
             {
                 if (otherHand == null)
                 {
@@ -45,32 +44,31 @@ namespace AdventOfCode.Day5
                 {
                     return 1;
                 }
-                else if ((int)this.Strength > (int)otherHand.Strength)
+                else if ((int)Strength > (int)otherHand.Strength)
                 {
                     return -1;
                 }
-                else if ((int)this.Strength < (int)otherHand.Strength)
+                else if ((int)Strength < (int)otherHand.Strength)
                 {
                     return 1;
                 }
-                else 
+                else
                 {
-                    for (int i = 0; i < this.Cards.Length; i++)
+                    for (int i = 0; i < Cards.Length; i++)
                     {
-                        var compare = Hand.CompareCards(this.Cards[i], otherHand.Cards[i]);
+                        var compare = CompareCards(Cards[i], otherHand.Cards[i]);
                         if (compare != 0)
                         {
                             return compare;
                         }
                     }
-                    Console.WriteLine("Zero!");
                     return 0;
                 }
             }
             else
             {
                 throw new ArgumentException("Object is not a Hand");
-            }   
+            }
         }
 
         public static int CompareCards(char card1, char card2)
@@ -160,7 +158,7 @@ namespace AdventOfCode.Day5
             }      
 
             string[] textFromFile = File.ReadAllLines(filePath);
-            List<Bid> bids = new();
+            List<Bid> bids = [];
             foreach (var line in textFromFile)
             {
                 string[] lineSplit = line.Split(' ');
@@ -171,10 +169,10 @@ namespace AdventOfCode.Day5
             Console.WriteLine(string.Join('\n', bids));
 
             var total = 0;
-            var bidCount = bids.Count();
+            var bidCount = bids.Count;
             for (int i = 0; i < bidCount; ++i)
             {
-                total += (bids[i].amount * (bidCount - i));
+                total += bids[i].amount * (bidCount - i);
             }
 
             Console.WriteLine($"Total: {total}");

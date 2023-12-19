@@ -22,7 +22,7 @@ namespace AdventOfCode.Day5
                                                1901414562, 516150861, 2474299950, 152867148, 3394639029, 59690410, 
                                                862612782, 176128197];
                 
-        private static object _lock = new();
+        private static readonly object _lock = new();
 
         public static void Main(string[] args)
         {
@@ -48,7 +48,7 @@ namespace AdventOfCode.Day5
             }
 
             // Parse all the seed ranges into a list
-            List<SeedRange> seedRanges = new();
+            List<SeedRange> seedRanges = [];
             for (int i = 0; i < seeds.Length - 1; i += 2)
             {
                 seedRanges.Add(new SeedRange(seeds[i], seeds[i + 1]));
@@ -56,7 +56,7 @@ namespace AdventOfCode.Day5
 
             // Brute force: Find the best result
             var bestResult = long.MaxValue;
-            Parallel.For(0, seedRanges.Count(),
+            Parallel.For(0, seedRanges.Count,
                          index => { var seedRange = seedRanges[index];
                                     var result = GetBestSeedLocationFromRange(almanac, seedRange);
                                     lock (_lock)
@@ -74,19 +74,18 @@ namespace AdventOfCode.Day5
         static List<List<Mapping>> ParseAlmanac(string[] almanacLines)
         {
             int index = 0;
-            List<List<Mapping>> almanac = new();
-            almanac.Add(new List<Mapping>());
+            List<List<Mapping>> almanac = [[]];
 
             foreach (var line in almanacLines)
             {
                 if (string.IsNullOrEmpty(line))
                 {
                     index++;
-                    almanac.Add(new List<Mapping>());
+                    almanac.Add([]);
                 }
                 else if (char.IsDigit(line[0]))
                 {
-                    var values = line.Split(' ').Select(x => long.Parse(x)).ToList();
+                    var values = line.Split(' ').Select(long.Parse).ToList();
                     almanac[index].Add(new Mapping(values[0], values[1], values[2]));
                 }
             }
@@ -134,7 +133,6 @@ namespace AdventOfCode.Day5
 
     public class MapComparer : Comparer<Mapping>
     {
-        // Compares by Length, Height, and Width.
         public override int Compare(Mapping? m1, Mapping? m2)
         {
             if (m2 == null)

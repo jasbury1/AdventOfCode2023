@@ -34,7 +34,7 @@ namespace AdventOfCode.Day4
             {
                 if (WinningNumbers.Contains(num))
                 {
-                    score = (score == 0 ? 1 : score * 2);
+                    score = score == 0 ? 1 : score * 2;
                 }
             }
             return score;
@@ -55,14 +55,14 @@ namespace AdventOfCode.Day4
                 throw new ArgumentException($"The file at {filePath} does not exist");
             }      
 
-            List<Scratchcard> cards = new();
+            List<Scratchcard> cards = [];
             string[] textFromFile = File.ReadAllLines(filePath);
             foreach (var line in textFromFile)
             {
                 cards.Add(ParseScratchcard(line));
             }
 
-            var cardCounts = new int[cards.Count()];
+            var cardCounts = new int[cards.Count];
             Array.Fill(cardCounts, 1);
 
             for (int i = 0; i < cardCounts.Length; i++)
@@ -84,8 +84,8 @@ namespace AdventOfCode.Day4
 
         public static Scratchcard ParseScratchcard(string line)
         {
-            HashSet<int> winningNumbers = new();
-            List<int> cardNumbers = new();
+            HashSet<int> winningNumbers = [];
+            List<int> cardNumbers = [];
 
             ICollection<int> currentSet = winningNumbers;
 

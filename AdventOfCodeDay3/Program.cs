@@ -1,12 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
-
-namespace AdventOfCode.Day3
+﻿namespace AdventOfCode.Day3
 {
-    public record Point(int x, int y);
+    public record Point(int X, int Y);
 
-    public record PartNumber(int value, Point start, int length);
+    public record PartNumber(int Value, Point Start, int Length);
     
 
     partial class Program
@@ -27,7 +23,7 @@ namespace AdventOfCode.Day3
             char[][] schematic = new char[textFromFile.Length][];
 
             int row = 0;
-            List<PartNumber> partNumbers = new();
+            List<PartNumber> partNumbers = [];
             foreach (string line in textFromFile)
             {
                 var schematicRow = line.ToCharArray();
@@ -37,7 +33,7 @@ namespace AdventOfCode.Day3
             }
 
             var result = partNumbers.Where(x => IsPartTouchingSymbol(x, schematic))
-                .Select(x => x.value)
+                .Select(x => x.Value)
                 .Sum();
 
             Console.WriteLine($"Result Part 1: {result}");
@@ -50,7 +46,7 @@ namespace AdventOfCode.Day3
                     if (schematic[i][j] == '*')
                     {
                         var adjacentParts = partNumbers.Where(x => IsPartTouchingGear(x, new Point(j, i))).ToList();
-                        if (adjacentParts.Count() == 2) {total += adjacentParts[0].value * adjacentParts[1].value;}
+                        if (adjacentParts.Count == 2) {total += adjacentParts[0].Value * adjacentParts[1].Value;}
                     }
                 }
             }
@@ -61,7 +57,7 @@ namespace AdventOfCode.Day3
         public static IEnumerable<PartNumber> ParsePartNumbers(char[] schematicRow, int rowNumber)
         {
             int i = 0;
-            List<PartNumber> partNumbers = new();
+            List<PartNumber> partNumbers = [];
 
             while (i < schematicRow.Length)
             {
@@ -89,9 +85,9 @@ namespace AdventOfCode.Day3
         public static bool IsPartTouchingSymbol(PartNumber part, char[][] schematic)
         {
             var schematicRowLen = schematic[0].Length;
-            for(int i = part.start.y - 1; i < part.start.y + 2; i++)
+            for(int i = part.Start.Y - 1; i < part.Start.Y + 2; i++)
             {
-                for(int j = part.start.x - 1; j <= part.start.x + part.length; j++)
+                for(int j = part.Start.X - 1; j <= part.Start.X + part.Length; j++)
                 {
                     if (i >= 0 && i < schematic.Length && j >= 0 && j < schematicRowLen)
                     {
@@ -110,8 +106,8 @@ namespace AdventOfCode.Day3
 
         public static bool IsPartTouchingGear(PartNumber part, Point gear)
         {
-            return (Math.Abs(part.start.y - gear.y) <= 1) && 
-                (gear.x >= (part.start.x - 1) && gear.x <= (part.start.x + part.length));
+            return (Math.Abs(part.Start.Y - gear.Y) <= 1) && 
+                gear.X >= (part.Start.X - 1) && gear.X <= (part.Start.X + part.Length);
         }
     } 
 
